@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::redirect('/', '/home', 301);
+
+Route::middleware('auth')->group(function() {
+	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/contacts', 'ContactBookController@index')->name('contacts');
 });
+
